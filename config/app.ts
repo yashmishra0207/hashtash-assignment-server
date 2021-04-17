@@ -27,6 +27,8 @@ import { ValidatorConfig } from '@ioc:Adonis/Core/Validator'
 */
 export const appKey: string = Env.get('APP_KEY')
 
+export const tokenExpiry = Env.get('TOKEN_EXPIRY');
+
 /*
 |--------------------------------------------------------------------------
 | Http server configuration
