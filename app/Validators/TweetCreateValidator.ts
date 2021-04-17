@@ -2,9 +2,9 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import messages from './_messages'
 
-export default class SignUpValidator {
-	constructor(protected ctx: HttpContextContract) {
-	}
+export default class TweetCreateValidator {
+  constructor (protected ctx: HttpContextContract) {
+  }
 
 	/*
 	 * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
@@ -26,15 +26,11 @@ export default class SignUpValidator {
 	 *    ```
 	 */
 	public schema = schema.create({
-		fullName: schema.string({ trim: true }),
-		email: schema.string({ trim: true }, [rules.email(), rules.unique({ table: 'users', column: 'email', caseInsensitive: true })]),
-		handle: schema.string({ trim: true }, [rules.minLength(1), rules.maxLength(40), rules.regex(/^\S+$/)]),
-		phone: schema.string.optional(),
-		location: schema.string.optional(),
-		profilePic: schema.string.optional(),
-		about: schema.string.optional(),
-		password: schema.string({}, [rules.minLength(8)]),
-	})
+		title: schema.string({ trim: true }, [rules.minLength(1), rules.maxLength(100)]),
+		content: schema.string.optional({ trim: true }, [rules.minLength(2)]),
+		imageUrl: schema.string.optional({ trim: true }),
+		hashtags: schema.string.optional({ trim: true }),
+  })
 
 	/**
 	 * Custom messages for validation failures. You can make use of dot notation `(.)`
@@ -49,7 +45,5 @@ export default class SignUpValidator {
 	 */
 	public messages = {
 		...messages,
-		'email.unique': 'This email already exists!',
-		'handle.regex': 'The handle can not contain space(s)',
 	}
 }

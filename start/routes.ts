@@ -35,4 +35,8 @@ Route.post('/signup', 'AuthController.signup');
 
 Route.group(() => {
   Route.get('/me', 'UsersController.me');
+
+  Route.group(() => {
+    Route.post('/', 'TweetsController.create');
+  }).prefix('tweet')
 }).middleware('auth')
