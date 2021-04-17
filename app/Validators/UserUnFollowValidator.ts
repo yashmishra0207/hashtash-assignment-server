@@ -2,7 +2,7 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import messages from './_messages'
 
-export default class LoginValidator {
+export default class UserUnFollowValidator {
   constructor (protected ctx: HttpContextContract) {
   }
 
@@ -26,8 +26,7 @@ export default class LoginValidator {
 	 *    ```
 	 */
 	public schema = schema.create({
-		email: schema.string({trim: true}, [rules.email(), rules.exists({ table: 'users', column: 'email'})]),
-	  password: schema.string(),
+		userIdToBeUnFollowed: schema.number([rules.exists({ table: 'users', column: 'id' })]),
   })
 
 	/**
@@ -43,6 +42,6 @@ export default class LoginValidator {
 	 */
 	public messages = {
 		...messages,
-		'email.exists': 'Account with this email does not exist'
+		'userIdToBeUnFollowed.exists': 'User to be unfollowed does not exist',
 	}
 }

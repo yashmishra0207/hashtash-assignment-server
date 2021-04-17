@@ -2,7 +2,7 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import messages from './_messages'
 
-export default class LoginValidator {
+export default class TweetSearchStringValidator {
   constructor (protected ctx: HttpContextContract) {
   }
 
@@ -26,8 +26,10 @@ export default class LoginValidator {
 	 *    ```
 	 */
 	public schema = schema.create({
-		email: schema.string({trim: true}, [rules.email(), rules.exists({ table: 'users', column: 'email'})]),
-	  password: schema.string(),
+		search: schema.string({ trim: true }, [rules.minLength(1), rules.maxLength(32)]),
+		isHashtag: schema.boolean.optional(),
+		page: schema.number.optional([rules.unsigned()]),
+		limit: schema.number.optional([rules.unsigned()]),
   })
 
 	/**
@@ -43,6 +45,5 @@ export default class LoginValidator {
 	 */
 	public messages = {
 		...messages,
-		'email.exists': 'Account with this email does not exist'
 	}
 }

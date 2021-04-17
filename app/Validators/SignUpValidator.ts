@@ -28,7 +28,7 @@ export default class SignUpValidator {
 	public schema = schema.create({
 		fullName: schema.string({ trim: true }),
 		email: schema.string({ trim: true }, [rules.email(), rules.unique({ table: 'users', column: 'email', caseInsensitive: true })]),
-		handle: schema.string({ trim: true }, [rules.minLength(1), rules.maxLength(40), rules.regex(/^\S+$/)]),
+		handle: schema.string({ trim: true }, [rules.minLength(1), rules.maxLength(40), rules.unique({ table: 'users', column: 'handle' }), rules.regex(/^\S+$/)]),
 		phone: schema.string.optional(),
 		location: schema.string.optional(),
 		profilePic: schema.string.optional(),
@@ -51,5 +51,6 @@ export default class SignUpValidator {
 		...messages,
 		'email.unique': 'This email already exists!',
 		'handle.regex': 'The handle can not contain space(s)',
+		'handle.unique': 'This handle is already taken',
 	}
 }

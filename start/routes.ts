@@ -34,9 +34,23 @@ Route.post('/login', 'AuthController.login');
 Route.post('/signup', 'AuthController.signup');
 
 Route.group(() => {
-  Route.get('/me', 'UsersController.me');
+  Route.group(() => {
+    Route.get('/me', 'UsersController.me');
+    Route.get('/show/:id', 'UsersController.show');
+    Route.get('/search', 'UsersController.search');
+    Route.post('/follow', 'UsersController.follow');
+    Route.post('/unfollow', 'UsersController.unFollow');
+    Route.get('/followers', 'UsersController.followers');
+    Route.get('/following', 'UsersController.followings');
+  }).prefix('user')
 
   Route.group(() => {
     Route.post('/', 'TweetsController.create');
+    Route.get('/', 'TweetsController.myTweets');
+    Route.get('/search', 'TweetsController.search');
   }).prefix('tweet')
+
+  Route.group(() => {
+    Route.get('/', 'TweetsController.list');
+  }).prefix('feed')
 }).middleware('auth')

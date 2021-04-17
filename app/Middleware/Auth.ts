@@ -12,7 +12,6 @@ export default class Auth {
     }
     try {      
       const data: any = await jwtService.verify(token);
-      console.log(data);
       const user = await User.findOrFail(data.sub);
       request.loggedInUser = user;
     } catch(e) {
