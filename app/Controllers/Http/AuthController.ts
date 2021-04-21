@@ -27,7 +27,7 @@ console.log('here')
 
     public async signup ({ request, response }: HttpContextContract) {
         const sanitizedPayload = await request.validate(SignUpValidator);
-        const user = await userService.creiate(sanitizedPayload);
+        const user = await userService.create(sanitizedPayload);
         return response.status(200).json(responseUtil.reponseJson({ user }, "account created successfully!"));
     }
 }
