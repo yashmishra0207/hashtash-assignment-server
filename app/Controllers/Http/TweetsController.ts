@@ -11,7 +11,7 @@ export default class TweetsController {
     const sanitizedPayload = await request.validate(TweetCreateValidator);
     const { id } = request.loggedInUser;
     const createdPost = await tweetService.create({ userId: id, ...sanitizedPayload });
-    return response.status(200).json(responseUtil.reponseJson({ createdPost }, "tweeted successfully!"));
+    return response.status(200).json(responseUtil.reponseJson({ createdPost }, "You tweeted just now!"));
   }
 
   public async list ({ request, response }: HttpContextContract) {

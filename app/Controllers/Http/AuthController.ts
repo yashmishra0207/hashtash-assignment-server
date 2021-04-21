@@ -12,7 +12,7 @@ export default class AuthController {
         const sanitizedPayload = await request.validate(LoginValidator);
         const { email, password } = sanitizedPayload;
         const user = await userService.find('email', email);
-
+console.log('here')
         if (!user || !user.password) {
             throw UnauthenticatedException.invalidLoginDetails();
         }
@@ -27,7 +27,7 @@ export default class AuthController {
 
     public async signup ({ request, response }: HttpContextContract) {
         const sanitizedPayload = await request.validate(SignUpValidator);
-        const user = await userService.create(sanitizedPayload);
+        const user = await userService.creiate(sanitizedPayload);
         return response.status(200).json(responseUtil.reponseJson({ user }, "account created successfully!"));
     }
 }

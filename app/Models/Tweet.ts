@@ -18,6 +18,12 @@ export default class Tweet extends BaseModel {
   public imageUrl: string
 
   @column()
+  public imageHeight: number
+
+  @column()
+  public imageWidth: number
+
+  @column()
   public hashtags: string
 
   @column.dateTime({ autoCreate: true })

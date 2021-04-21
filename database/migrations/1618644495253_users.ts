@@ -12,7 +12,7 @@ export default class Users extends BaseSchema {
       table.string('phone').nullable()
       table.string('location').nullable()
       table.string('profile_pic').nullable()
-      table.string('about').nullable()
+      table.text('about').nullable()
       table.string('password').notNullable()
       table.timestamps()
     })

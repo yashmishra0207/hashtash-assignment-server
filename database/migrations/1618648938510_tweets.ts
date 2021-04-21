@@ -8,9 +8,11 @@ export default class Tweets extends BaseSchema {
       table.increments('id')
       table.integer('user_id').notNullable().unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.string('title').notNullable()
-      table.string('content').nullable()
+      table.text('content').nullable()
       table.string('image_url').nullable()
-      table.string('hashtags').nullable()
+      table.string('image_width').nullable()
+      table.string('image_height').nullable()
+      table.text('hashtags').nullable()
       table.timestamps()
     })
   }

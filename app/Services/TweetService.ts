@@ -18,7 +18,7 @@ class TweetService {
     const { page, limit } = payload;
     const pageNo = page ? page : 1;
     const pageLimit = limit ? limit : 10;
-    let feed = Tweet.query().whereIn('user_id', Follower.query().select('user_id').distinct().where('follower_id', loggedInUserId)).orderBy('created_at', "desc").paginate(pageNo, pageLimit);
+    let feed = Tweet.query().where('user_id', loggedInUserId).orWhereIn('user_id', Follower.query().select('user_id').distinct().where('follower_id', loggedInUserId)).orderBy('created_at', "desc").paginate(pageNo, pageLimit);
     return feed;
   }
 
