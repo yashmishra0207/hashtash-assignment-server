@@ -1,5 +1,6 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder';
 import User from 'App/Models/User';
+import { seederService } from 'App/Services/SeederService';
 import * as faker from 'faker';
 
 export default class UserSeeder extends BaseSeeder {
@@ -8,6 +9,9 @@ export default class UserSeeder extends BaseSeeder {
   
   public async run () {
     // Write your database queries inside the run method
+
+    // remove old dummy seeders data
+    await seederService.removeOldData();
 
     let users: any[] = [];
 

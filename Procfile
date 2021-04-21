@@ -1,2 +1,4 @@
+release: ENV_SILENT=true node ace migration:rollback --force
 release: ENV_SILENT=true node ace migration:run --force
-web: ENV_SILENT=true npm start
+release: ENV_SILENT=true node ace db:seed
+web: ENV_SILENT=true node /server.js
